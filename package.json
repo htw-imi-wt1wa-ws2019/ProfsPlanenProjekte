@@ -9,11 +9,12 @@
   },
   "scripts": {
     "start": "concurrently \"npm run start:backend\" \"npm run start:frontend\" ",
-    "start:backend": "node app.js",
+    "start:backend": "nodemon app.js",
     "start:frontend": "cd frontend && npm start"
   },
   "devDependencies": {
     "concurrently": "^5.0.0",
+    "nodemon": "^1.19.4",
     "vue-cli": "^2.9.6"
   }
 }
