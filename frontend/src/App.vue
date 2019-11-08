@@ -1,7 +1,13 @@
 <template>
-  <div id="app">
-    <ProjectList :projects="projects" />
-  </div>
+  <md-app md-waterfall md-mode="fixed">
+    <md-app-toolbar class="md-primary">
+      <span class="md-title">Praxis-Projektverwaltung</span>
+    </md-app-toolbar>
+    <md-app-content>
+      <h1 class="md-headline">Projektideen</h1>
+      <ProjectList :projects="projects" />
+    </md-app-content>
+  </md-app>
 </template>
 
 <script>
@@ -12,23 +18,13 @@ export default {
   name: "app",
   data: function() {
     return {
-      projects: [
-        {
-          id: "project1"
-        },
-        {
-          id: "project2"
-        },
-        {
-          id: "project3"
-        }
-      ]
+      projects: []
     };
   },
   mounted() {
     axios
       .get("http://localhost:8080/api/projects")
-      .then(response => (this.projects = response));
+      .then(res => (this.projects = res.data));
   },
   components: {
     ProjectList
@@ -37,12 +33,27 @@ export default {
 </script>
 
 <style>
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
 #app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  padding: 3rem;
+}
+h1 {
+  text-align: left;
+  padding-left: 1rem;
+  padding-top: 1rem;
+}
+.md-content {
+  width: 100%;
+  max-width: 60rem;
+  margin: 0 auto;
 }
 </style>

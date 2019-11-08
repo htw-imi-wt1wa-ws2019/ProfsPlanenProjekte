@@ -1,11 +1,10 @@
 <template>
   <div class="project-list">
-    <h1>Projektideen</h1>
-    <ul>
-      <li v-for="(project, index) in projects" :key="index">
+    <md-list class="md-double-line">
+      <md-list-item v-for="(project, index) in projects" :key="index">
         <ProjectListItem :project="project" />
-      </li>
-    </ul>
+      </md-list-item>
+    </md-list>
   </div>
 </template>
 

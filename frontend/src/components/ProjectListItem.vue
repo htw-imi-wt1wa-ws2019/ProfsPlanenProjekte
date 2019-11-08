@@ -1,9 +1,11 @@
 <template>
-  <table class="project-list__item">
-    <tr>
-      <td>ID: {{ project.id }}</td>
-    </tr>
-  </table>
+  <md-card>
+    <md-content>
+      <md-subheader class="projectlist__item__header">ID</md-subheader>
+      <md-divider></md-divider>
+      <md-subheader>{{ project.id }}</md-subheader>
+    </md-content>
+  </md-card>
 </template>
 
 <script>
@@ -17,7 +19,14 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-td {
-  border: 1px solid black;
+.projectlist__item__header {
+  font-weight: bold;
+}
+.md-card {
+  width: 100%;
+  display: flex;
+}
+.md-content {
+  margin: 1em;
 }
 </style>
