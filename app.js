@@ -2,8 +2,18 @@ var express = require('express');
 var path = require('path');
 var app = express();
 
-app.get('/', function (req, res) {
-  res.sendFile(path.join(__dirname + '/index.html'));
+app.get('/api/projects', function (req, res) {
+  const projects = [{
+      id: 'server project1'
+    },
+    {
+      id: 'server project2'
+    },
+    {
+      id: 'server project3'
+    },
+  ]
+  res.json(projects);
 });
 
 app.listen(8080, function () {
