@@ -10,7 +10,8 @@
   "scripts": {
     "start": "concurrently \"npm run start:backend\" \"npm run start:frontend\" ",
     "start:backend": "nodemon app.js",
-    "start:frontend": "cd frontend && npm start"
+    "start:frontend": "cd frontend && npm start",
+    "install:all": "npm install && cd frontend && npm install"
   },
   "devDependencies": {
     "concurrently": "^5.0.0",
