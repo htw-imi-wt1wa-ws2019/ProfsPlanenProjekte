@@ -7,3 +7,5 @@
 ```
 npm start
 ```
+
+4. Create MariaDB Database with following command `create database profs_planen_projekte`
