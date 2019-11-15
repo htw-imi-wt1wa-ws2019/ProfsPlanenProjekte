@@ -11,27 +11,30 @@
       <div class="md-layout">
         <md-content class="md-layout-item">
           <md-subheader class="projectlist__item__header">Name</md-subheader>
-          <md-subheader>project.contact.name</md-subheader>
+          <md-subheader>{{ project.contact_name }}</md-subheader>
         </md-content>
         <md-content class="md-layout-item">
           <md-subheader class="projectlist__item__header">Date</md-subheader>
-          <md-subheader>project.contact.date</md-subheader>
+          <md-subheader>{{ project.contact_date }}</md-subheader>
         </md-content>
       </div>
 
       <md-content class="md-layout-item md-layout__email">
         <md-subheader class="projectlist__item__header">E-Mail</md-subheader>
-        <md-subheader>project.contact.mail</md-subheader>
+        <md-subheader>{{ project.contact_email }}</md-subheader>
       </md-content>
     </div>
-    <md-divider></md-divider>
-    <div class="md-layout">
-      <md-content class="md-layout-item">
-        <md-subheader class="projectlist__item__header"
-          >Bemerkungen</md-subheader
-        >
-        <md-subheader>project.comment</md-subheader>
-      </md-content>
+
+    <div v-if="project.comment !== 'null'">
+      <md-divider></md-divider>
+      <div class="md-layout">
+        <md-content class="md-layout-item">
+          <md-subheader class="projectlist__item__header"
+            >Bemerkungen</md-subheader
+          >
+          <md-subheader>{{ project.comment }}</md-subheader>
+        </md-content>
+      </div>
     </div>
   </md-card>
 </template>
@@ -78,5 +81,8 @@ export default {
 }
 .md-layout__email {
   margin-top: 0;
+}
+.md-subheader {
+  min-height: 2.5em;
 }
 </style>
