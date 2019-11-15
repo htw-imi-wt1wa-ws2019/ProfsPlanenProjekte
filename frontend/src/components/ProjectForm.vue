@@ -25,12 +25,12 @@
               <md-input
                 name="contact_name"
                 id="contact_name"
-                v-model="form.contact.name"
+                v-model="form.contact_name"
               />
             </md-field>
           </div>
           <div class="md-layout-item md-small-size-100">
-            <md-datepicker v-model="form.contact.date" placeholder="Datum" />
+            <md-datepicker v-model="form.contact_date" placeholder="Datum" />
           </div>
         </div>
         <div class="md-layout-item md-small-size-100">
@@ -39,7 +39,7 @@
             <md-input
               name="contact_mail"
               id="contact_mail"
-              v-model="form.contact.mail"
+              v-model="form.contact_mail"
             />
           </md-field>
         </div>
@@ -72,11 +72,10 @@ export default {
         title: null,
         lecturer: null,
         comment: null,
-        contact: {
-          name: null,
-          date: new Date(),
-          mail: null
-        }
+        contact_name: null,
+        contact_email: null,
+        contact_date: new Date(),
+        status: 0
       }
     };
   },

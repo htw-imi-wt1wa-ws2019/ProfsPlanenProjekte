@@ -37,10 +37,19 @@ app.get('/api/projects', function (req, res) {
 // });
 
 app.post('/api/projects', function (req, res) {
-  console.log(req.body);
+  const formatted_date = new Date(req.body.contact_date).toISOString().slice(0, 19).replace('T', ' ');
 
   con.then(connection => {
-    connection.query("INSERT INTO project (title) values('" + req.body.title + "')").then(projects => {
+    connection.query(`INSERT INTO project (title, lecturer, comment, contact_name, contact_email, contact_date, status) 
+                      values(
+                        '${req.body.title}',
+                        '${req.body.lecturer}',
+                        '${req.body.comment}',
+                        '${req.body.contact_name}',
+                        '${req.body.contact_email}',
+                        '${formatted_date}',
+                        '${req.body.status}'
+    )`).then(projects => {
       res.sendStatus(200);
     });
   });
