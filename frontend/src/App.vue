@@ -4,31 +4,15 @@
       <span class="md-title">Praxis-Projektverwaltung</span>
     </md-app-toolbar>
     <md-app-content>
-      <h1 class="md-headline">Projektideen</h1>
-      <ProjectList :projects="projects" />
+      <router-view></router-view>
     </md-app-content>
   </md-app>
 </template>
 
 <script>
-import ProjectList from "./components/ProjectList.vue";
-import axios from "axios";
-
 export default {
   name: "app",
-  data: function() {
-    return {
-      projects: []
-    };
-  },
-  mounted() {
-    axios
-      .get("http://localhost:8080/api/projects")
-      .then(res => (this.projects = res.data));
-  },
-  components: {
-    ProjectList
-  }
+  components: {}
 };
 </script>
 
@@ -37,6 +21,7 @@ html,
 body {
   margin: 0;
   padding: 0;
+  height: 100%;
 }
 #app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
@@ -48,12 +33,22 @@ body {
 }
 h1 {
   text-align: left;
-  padding-left: 1rem;
-  padding-top: 1rem;
+  padding-top: 0;
+  margin: 0;
+}
+.md-app {
+  height: 100%;
+  padding-bottom: 2rem;
 }
 .md-content {
   width: 100%;
   max-width: 60rem;
   margin: 0 auto;
+}
+.projectlist-header {
+  padding-top: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-self: center;
 }
 </style>
