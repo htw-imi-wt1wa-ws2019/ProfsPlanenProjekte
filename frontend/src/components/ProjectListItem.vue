@@ -7,7 +7,7 @@
           <md-badge
             v-if="showStatus && project.status === 1"
             class="md-square"
-            md-content="Published"
+            md-content="Veröffentlicht"
           />
         </div>
         <md-subheader>{{ project.lecturer }}</md-subheader>
@@ -32,7 +32,7 @@
           <md-subheader>{{ project.contact_name }}</md-subheader>
         </md-content>
         <md-content class="md-layout-item">
-          <md-subheader class="projectlist__item__header">Date</md-subheader>
+          <md-subheader class="projectlist__item__header">Datum</md-subheader>
           <md-subheader>{{ formattedDate }}</md-subheader>
         </md-content>
       </div>

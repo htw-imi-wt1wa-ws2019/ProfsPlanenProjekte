@@ -12,7 +12,7 @@ Vue.use(VueMaterial)
 Vue.config.productionTip = false
 
 
-// Rounting
+// Routing
 import ProjectIdeaOverview from './pages/ProjectIdeaOverview.vue';
 import ProjectOverview from './pages/ProjectOverview.vue';
 import AddProject from './pages/AddProject.vue';
@@ -37,7 +37,7 @@ const routes = [{
 ];
 
 const router = new VueRouter({
-  routes // short for `routes: routes`
+  routes
 })
 
 

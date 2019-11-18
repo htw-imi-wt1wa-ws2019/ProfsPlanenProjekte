@@ -4,7 +4,7 @@
       <div class="md-layout">
         <div class="md-layout-item md-small-size-100 status-select__layout">
           <md-checkbox v-model="form.status" :true-value="1" :false-value="0"
-            >Published</md-checkbox
+            >Veröffentlicht</md-checkbox
           >
         </div>
       </div>
@@ -15,16 +15,16 @@
             <label for="title">Projekttitel</label>
             <md-input name="title" id="title" v-model="form.title" />
             <span class="md-error" v-if="!$v.form.title.required"
-              >A title is required</span
+              >Bitte geben Sie einen Titel an</span
             >
           </md-field>
         </div>
         <div class="md-layout-item md-small-size-100">
           <md-field :class="getValidationClass('lecturer')">
-            <label for="lecturer">Lecturer</label>
+            <label for="lecturer">Prof</label>
             <md-input name="lecturer" id="lecturer" v-model="form.lecturer" />
             <span class="md-error" v-if="!$v.form.lecturer.required"
-              >A lecturer is required</span
+              >Bitte geben Sie einen Prof an</span
             >
           </md-field>
         </div>
@@ -42,7 +42,7 @@
                 v-model="form.contact_name"
               />
               <span class="md-error" v-if="!$v.form.contact_name.required"
-                >A name is required</span
+                >Bitte geben Sei einen Namen an</span
               >
             </md-field>
           </div>
@@ -59,10 +59,10 @@
               v-model="form.contact_email"
             />
             <span class="md-error" v-if="!$v.form.contact_email.required"
-              >An email is required</span
+              >Bitte geben Sie eine E-Mail an</span
             >
             <span class="md-error" v-else-if="!$v.form.contact_email.email"
-              >This has to be a valid email address</span
+              >Dies muss eine E-Mail-Adresse sein</span
             >
           </md-field>
         </div>

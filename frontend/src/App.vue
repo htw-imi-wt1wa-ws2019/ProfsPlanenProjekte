@@ -3,10 +3,10 @@
     <md-app-toolbar class="md-primary">
       <span class="md-title">Praxis-Projekte</span>
       <md-button v-if="activeRoute === '/'" to="/projects" exact
-        >See published projects</md-button
+        >Veröffentlichte Projekte</md-button
       >
       <md-button v-if="activeRoute === '/projects'" to="/" exact
-        >See project ideas</md-button
+        >Projektideen</md-button
       >
     </md-app-toolbar>
     <md-app-content>
