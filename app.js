@@ -16,6 +16,7 @@ const con = mariadb.createPool({
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS');
   next();
 });
 app.use(bodyParser.json());
@@ -28,17 +29,39 @@ app.get('/api/projects', function (req, res) {
   });
 });
 
-// app.get('/api/delete', function (req, res) {
-//   con.then(connection => {
-//     connection.query("DELETE FROM project").then(projects => {
-//       res.sendStatus(200);
-//     });
-//   });
-// });
+app.get('/api/projects/:id', function (req, res) {
+  con.then(connection => {
+    connection.query("SELECT * FROM project WHERE id = " + req.params.id).then(project => {
+      res.json(project);
+    });
+  });
+});
+
+app.put('/api/projects/:id', function (req, res) {
+  console.log('##################');
+  console.log('##################');
+  console.log('Abrakadabra');
+  console.log('##################');
+  console.log('##################');
+  console.log('##################');
+
+  con.then(connection => {
+    connection.query(`UPDATE project SET
+      title = '${req.body.title}',
+      lecturer = '${req.body.lecturer}',
+      comment = '${req.body.comment}',
+      contact_name = '${req.body.contact_name}',
+      contact_email = '${req.body.contact_email}',
+      contact_date = '${formatDate(req.body.contact_date)}',
+      status = '${req.body.status}' 
+    WHERE id = ${req.params.id}
+    `).then(project => {
+      res.json(project);
+    });
+  });
+});
 
 app.post('/api/projects', function (req, res) {
-  const formatted_date = new Date(req.body.contact_date).toISOString().slice(0, 19).replace('T', ' ');
-
   con.then(connection => {
     connection.query(`INSERT INTO project (title, lecturer, comment, contact_name, contact_email, contact_date, status) 
                       values(
@@ -47,13 +70,27 @@ app.post('/api/projects', function (req, res) {
                         '${req.body.comment}',
                         '${req.body.contact_name}',
                         '${req.body.contact_email}',
-                        '${formatted_date}',
+                        '${formatDate(req.body.contact_date)}',
                         '${req.body.status}'
     )`).then(projects => {
       res.sendStatus(200);
     });
   });
 });
+
+
+function formatDate(date) {
+  return new Date(date).toISOString().slice(0, 19).replace('T', ' ');
+}
+
+
+// app.get('/api/delete', function (req, res) {
+//   con.then(connection => {
+//     connection.query("DELETE FROM project").then(projects => {
+//       res.sendStatus(200);
+//     });
+//   });
+// });
 
 app.listen(8080, function () {
   console.log('Example app listening on port 8080!');

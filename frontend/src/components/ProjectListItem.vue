@@ -1,8 +1,15 @@
 <template>
   <md-card>
-    <md-toolbar class="project-item__header">
-      <h2 class="md-title">{{ project.title }}</h2>
-      <md-subheader>{{ project.lecturer }}</md-subheader>
+    <md-toolbar>
+      <div class="project-item__header">
+        <h2 class="md-title">{{ project.title }}</h2>
+        <md-subheader>{{ project.lecturer }}</md-subheader>
+      </div>
+      <md-button class="md-icon-button" :to="'/edit/' + project.id">
+        <md-icon>
+          <img :src="iconUrl" alt="edit icon" />
+        </md-icon>
+      </md-button>
     </md-toolbar>
 
     <div class="md-layout contact-layout">
@@ -15,7 +22,7 @@
         </md-content>
         <md-content class="md-layout-item">
           <md-subheader class="projectlist__item__header">Date</md-subheader>
-          <md-subheader>{{ project.contact_date }}</md-subheader>
+          <md-subheader>{{ formattedDate }}</md-subheader>
         </md-content>
       </div>
 
@@ -25,7 +32,7 @@
       </md-content>
     </div>
 
-    <div v-if="project.comment !== 'null'">
+    <div v-if="project.comment !== 'null' && project.comment !== ''">
       <md-divider></md-divider>
       <div class="md-layout">
         <md-content class="md-layout-item">
@@ -44,6 +51,16 @@ export default {
   name: "ProjectIdeaListItem",
   props: {
     project: Object
+  },
+  computed: {
+    iconUrl() {
+      return require("@/assets/icon-edit.svg");
+      // The path could be '../assets/img.png', etc., which depends on where your vue file is
+    },
+    formattedDate() {
+      const date = new Date(this.project.contact_date);
+      return `${date.getDate()}.${date.getMonth()}.${date.getFullYear()}`;
+    }
   }
 };
 </script>
@@ -78,11 +95,15 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 100%;
 }
 .md-layout__email {
   margin-top: 0;
 }
 .md-subheader {
   min-height: 2.5em;
+}
+.md-toolbar {
+  flex-wrap: nowrap;
 }
 </style>

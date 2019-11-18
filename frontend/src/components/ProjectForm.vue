@@ -87,9 +87,21 @@ export default {
   name: "ProjectForm",
   mixins: [validationMixin],
   props: {
-    projects: Array
+    project: null
   },
   components: {},
+  mounted() {
+    if (this.project) {
+      this.form.title = this.project.title;
+      this.form.lecturer = this.project.lecturer;
+      this.form.comment = this.project.comment;
+      this.form.contact_name = this.project.contact_name;
+      this.form.contact_email = this.project.contact_email;
+      this.form.contact_date = this.project.contact_date;
+      this.form.contact_date = this.project.contact_date;
+      this.form.status = this.project.status;
+    }
+  },
   data: function() {
     return {
       form: {
