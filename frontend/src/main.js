@@ -14,6 +14,7 @@ Vue.config.productionTip = false
 
 // Rounting
 import ProjectIdeaOverview from './pages/ProjectIdeaOverview.vue';
+import ProjectOverview from './pages/ProjectOverview.vue';
 import AddProject from './pages/AddProject.vue';
 import EditProject from './pages/EditProject.vue';
 
@@ -28,6 +29,10 @@ const routes = [{
   {
     path: '/edit/:id',
     component: EditProject
+  },
+  {
+    path: '/projects',
+    component: ProjectOverview
   }
 ];
 

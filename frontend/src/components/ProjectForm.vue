@@ -1,6 +1,14 @@
 <template>
   <md-card>
     <form novalidate class="md-layout" @submit.prevent="validateProject">
+      <div class="md-layout">
+        <div class="md-layout-item md-small-size-100 status-select__layout">
+          <md-checkbox v-model="form.status" :true-value="1" :false-value="0"
+            >Published</md-checkbox
+          >
+        </div>
+      </div>
+
       <div class="md-layout md-gutter">
         <div class="md-layout-item md-small-size-100">
           <md-field :class="getValidationClass('title')">
@@ -177,5 +185,12 @@ export default {
 }
 form {
   flex-direction: column;
+}
+.status-select {
+  width: 10rem;
+}
+.status-select__layout {
+  display: flex;
+  justify-content: flex-end;
 }
 </style>

@@ -2,7 +2,11 @@
   <div class="project-list">
     <md-list class="md-double-line">
       <md-list-item v-for="(project, index) in projects" :key="index">
-        <ProjectListItem :project="project" />
+        <ProjectListItem
+          :project="project"
+          :allowEdit="allowEdit"
+          :showStatus="showStatus"
+        />
       </md-list-item>
     </md-list>
   </div>
@@ -14,7 +18,9 @@ import ProjectListItem from "./ProjectListItem.vue";
 export default {
   name: "ProjectList",
   props: {
-    projects: Array
+    projects: Array,
+    allowEdit: Boolean,
+    showStatus: Boolean
   },
   components: {
     ProjectListItem
@@ -23,5 +29,4 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-</style>
+<style scoped></style>

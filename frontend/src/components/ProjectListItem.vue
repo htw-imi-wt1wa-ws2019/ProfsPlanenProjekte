@@ -2,10 +2,21 @@
   <md-card>
     <md-toolbar>
       <div class="project-item__header">
-        <h2 class="md-title">{{ project.title }}</h2>
+        <div class="project-item__title">
+          <h2 class="md-title">{{ project.title }}</h2>
+          <md-badge
+            v-if="showStatus && project.status === 1"
+            class="md-square"
+            md-content="Published"
+          />
+        </div>
         <md-subheader>{{ project.lecturer }}</md-subheader>
       </div>
-      <md-button class="md-icon-button" :to="'/edit/' + project.id">
+      <md-button
+        v-if="allowEdit"
+        class="md-icon-button"
+        :to="'/edit/' + project.id"
+      >
         <md-icon>
           <img :src="iconUrl" alt="edit icon" />
         </md-icon>
@@ -50,7 +61,9 @@
 export default {
   name: "ProjectIdeaListItem",
   props: {
-    project: Object
+    project: Object,
+    allowEdit: Boolean,
+    showStatus: Boolean
   },
   computed: {
     iconUrl() {
@@ -105,5 +118,12 @@ export default {
 }
 .md-toolbar {
   flex-wrap: nowrap;
+}
+.project-item__title {
+  display: flex;
+  align-items: center;
+}
+.md-badge {
+  margin-left: 1em;
 }
 </style>

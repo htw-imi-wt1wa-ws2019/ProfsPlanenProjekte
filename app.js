@@ -29,6 +29,14 @@ app.get('/api/projects', function (req, res) {
   });
 });
 
+app.get('/api/projects/published', function (req, res) {
+  con.then(connection => {
+    connection.query("SELECT * FROM project WHERE status = 1").then(projects => {
+      res.json(projects);
+    });
+  });
+});
+
 app.get('/api/projects/:id', function (req, res) {
   con.then(connection => {
     connection.query("SELECT * FROM project WHERE id = " + req.params.id).then(project => {
@@ -38,13 +46,6 @@ app.get('/api/projects/:id', function (req, res) {
 });
 
 app.put('/api/projects/:id', function (req, res) {
-  console.log('##################');
-  console.log('##################');
-  console.log('Abrakadabra');
-  console.log('##################');
-  console.log('##################');
-  console.log('##################');
-
   con.then(connection => {
     connection.query(`UPDATE project SET
       title = '${req.body.title}',
