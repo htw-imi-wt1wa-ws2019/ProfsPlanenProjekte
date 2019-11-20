@@ -17,13 +17,16 @@ import ProjectListItem from "./ProjectListItem.vue";
 
 export default {
   name: "ProjectList",
+  // Register components we want to use
+  components: {
+    ProjectListItem
+  },
+
+  // Properties that parent elements can input data into
   props: {
     projects: Array,
     allowEdit: Boolean,
     showStatus: Boolean
-  },
-  components: {
-    ProjectListItem
   }
 };
 </script>

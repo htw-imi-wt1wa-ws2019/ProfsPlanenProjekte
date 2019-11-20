@@ -60,15 +60,18 @@
 <script>
 export default {
   name: "ProjectIdeaListItem",
+
+  // Properties that parent elements can input data into
   props: {
     project: Object,
     allowEdit: Boolean,
     showStatus: Boolean
   },
+
+  // Computed values get recomputed, when props/data properties change
   computed: {
     iconUrl() {
       return require("@/assets/icon-edit.svg");
-      // The path could be '../assets/img.png', etc., which depends on where your vue file is
     },
     formattedDate() {
       const date = new Date(this.project.contact_date);
