@@ -14,6 +14,8 @@ exports.setup = function(options, seedLink) {
   seed = seedLink;
 };
 
+// Function up is called with 'npm run migrate up'
+// Changes the database structure of the given database, declared in database.json
 exports.up = function(db) {
   db.insert( 'project', {
     title: "100 Dollar Game",
@@ -49,6 +51,8 @@ exports.up = function(db) {
  );
 };
 
+// Function down is called with 'npm run migrate down'
+// Reverting inserts doesn't work for mariadb with db-migrate sadly
 exports.down = function(db) {
   return null;
 };

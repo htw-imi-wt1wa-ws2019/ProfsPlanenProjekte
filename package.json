@@ -17,6 +17,7 @@
     "start": "concurrently \"npm run start:backend\" \"npm run start:frontend\" ",
     "start:backend": "nodemon app.js",
     "start:frontend": "cd frontend && npm start",
+    "test:frontend": "cd frontend && npm run test:unit",
     "install:all": "npm install && cd frontend && npm install",
     "migrate": "npx db-migrate"
   },
