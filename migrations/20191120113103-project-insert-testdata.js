@@ -19,8 +19,8 @@ exports.up = function(db) {
     title: "100 Dollar Game",
     lecturer: "Prof. Dr. Strippgen",
     comment: "Unity as Game Engine",
-    contact_name: "Strippgen",
-    contact_email: "strippgen@htw-berlin.de",
+    contact_name: "John Doe",
+    contact_email: "johndoe@htw-berlin.de",
     contact_date: "2000-04-03",
     status: false
   }
@@ -30,8 +30,8 @@ exports.up = function(db) {
   title: "Web Application with Rails",
   lecturer: "Prof. Dr. Kleinen",
   comment: "",
-  contact_name: "Kleinen",
-  contact_email: "kleinen@htw-berlin.de",
+  contact_name: "Peter Maffay",
+  contact_email: "maffay@htw-berlin.de",
   contact_date: "2018-06-05",
   status: true
 }
@@ -41,8 +41,8 @@ exports.up = function(db) {
     title: "Image Vectorizer",
     lecturer: "Prof. Dr. Jung",
     comment: "Use JavaFX as Frontend and Java as Backend",
-    contact_name: "Jung",
-    contact_email: "jung@htw-berlin.de",
+    contact_name: "Thorsten Throstenson",
+    contact_email: "throstenson@htw-berlin.de",
     contact_date: "1990-01-01",
     status: false
   }
