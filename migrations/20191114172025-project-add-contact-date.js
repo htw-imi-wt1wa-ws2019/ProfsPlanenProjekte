@@ -14,6 +14,8 @@ exports.setup = function(options, seedLink) {
   seed = seedLink;
 };
 
+// Function up is called with 'npm run migrate up'
+// Changes the database structure of the given database, declared in database.json
 exports.up = function(db, callback) {
   db.addColumn('project', 'contact_date', {
     type: 'date',
@@ -23,6 +25,8 @@ exports.up = function(db, callback) {
   });
 };
 
+// Function down is called with 'npm run migrate down'
+// Reverts the changes from migrate up in the given database, declared in database.json
 exports.down = function(db, callback) {
   db.removeColumn('project', 'contact_date', function(err) {
     if (err) return callback(err);
