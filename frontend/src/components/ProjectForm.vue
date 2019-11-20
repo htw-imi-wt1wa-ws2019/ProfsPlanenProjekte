@@ -93,23 +93,16 @@ import {
 
 export default {
   name: "ProjectForm",
+
+  // Import functionality with mixins, e.g. for form validation in this case
   mixins: [validationMixin],
+  
+  // Properties that parent elements can input data into
   props: {
     project: null
   },
-  components: {},
-  mounted() {
-    if (this.project) {
-      this.form.title = this.project.title;
-      this.form.lecturer = this.project.lecturer;
-      this.form.comment = this.project.comment;
-      this.form.contact_name = this.project.contact_name;
-      this.form.contact_email = this.project.contact_email;
-      this.form.contact_date = this.project.contact_date;
-      this.form.contact_date = this.project.contact_date;
-      this.form.status = this.project.status;
-    }
-  },
+  
+  // Reactive variables. View gets updated when these properties change
   data: function() {
     return {
       form: {
@@ -123,6 +116,23 @@ export default {
       }
     };
   },
+
+  // Lifecycle hook: Gets called when the component gets mounted
+  // (see: https://vuejs.org/v2/guide/instance.html#Lifecycle-Diagram)
+  mounted() {
+    if (this.project) {
+      this.form.title = this.project.title;
+      this.form.lecturer = this.project.lecturer;
+      this.form.comment = this.project.comment;
+      this.form.contact_name = this.project.contact_name;
+      this.form.contact_email = this.project.contact_email;
+      this.form.contact_date = this.project.contact_date;
+      this.form.contact_date = this.project.contact_date;
+      this.form.status = this.project.status;
+    }
+  },
+
+  // Define validation rules
   validations: {
     form: {
       title: {
@@ -140,6 +150,8 @@ export default {
       }
     }
   },
+
+  // Methods we want to call from template / component
   methods: {
     addProject: function() {
       this.$emit("saved", this.form);

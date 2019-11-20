@@ -10,7 +10,10 @@
       >
     </md-app-toolbar>
     <md-app-content>
+
+      <!-- The component that is registered for the current URL (see 'Routes' in main.js) is getting rendered here: -->
       <router-view></router-view>
+
     </md-app-content>
   </md-app>
 </template>
@@ -18,15 +21,21 @@
 <script>
 export default {
   name: "app",
-  components: {},
+
+  // Reactive variables. View gets updated when these properties change
   data: function() {
     return {
       activeRoute: null
     };
   },
+
+  // Lifecycle hook: Gets called when the component gets mounted
+  // (see: https://vuejs.org/v2/guide/instance.html#Lifecycle-Diagram)
   mounted() {
     this.activeRoute = this.$route.path;
   },
+
+  // Update activeRoute when URL gets updated 
   updated() {
     this.activeRoute = this.$route.path;
   }

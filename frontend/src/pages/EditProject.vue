@@ -10,20 +10,30 @@ import ProjectForm from "../components/ProjectForm.vue";
 import axios from "axios";
 export default {
   name: "AddProject",
+  
+  // Register components we want to use
+  components: {
+    ProjectForm
+  },
+
+  // Reactive variables. View gets updated when these properties change
   data: function() {
     return {
       project: null
     };
   },
-  components: {
-    ProjectForm
-  },
+
+
+  // Lifecycle hook: Gets called when the component gets mounted
+  // (see: https://vuejs.org/v2/guide/instance.html#Lifecycle-Diagram)
   mounted() {
     const id = this.$route.params.id;
     axios.get("http://localhost:8080/api/projects/" + id).then(res => {
       this.project = res.data[0];
     });
   },
+
+  // Methods we want to call from template / component
   methods: {
     editProject: function(data) {
       axios

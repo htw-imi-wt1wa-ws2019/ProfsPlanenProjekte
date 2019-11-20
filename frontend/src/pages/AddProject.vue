@@ -10,12 +10,18 @@ import ProjectForm from "../components/ProjectForm.vue";
 import axios from "axios";
 export default {
   name: "AddProject",
-  props: {
-    projects: Array
-  },
+
+  // Register components we want to use
   components: {
     ProjectForm
   },
+
+  // Properties that parent elements can input data into
+  props: {
+    projects: Array
+  },
+  
+  // Methods we want to call from template / component
   methods: {
     addProject: function(data) {
       axios.post("http://localhost:8080/api/projects", data).then(res => {
