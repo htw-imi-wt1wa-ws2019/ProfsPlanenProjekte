@@ -124,6 +124,22 @@ exports.down = function(db, callback) {
     if (err) return callback(err);
   });
 
+  db.removeColumn('project', 'extern_name', function(err) {
+    if (err) return callback(err);
+  });
+
+  db.removeColumn('project', 'extern_email', function(err) {
+    if (err) return callback(err);
+  });
+
+  db.removeColumn('project', 'extern_date', function(err) {
+    if (err) return callback(err);
+  });
+
+  db.removeColumn('project', 'extern_comment', function(err) {
+    if (err) return callback(err);
+  });
+
   db.addColumn('project', 'contact_name', {
     type: 'string',
     notNull: true
