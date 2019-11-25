@@ -3,7 +3,7 @@
     <header class="projectlist-header">
       <h1 class="md-headline">Öffentliche Projekte</h1>
     </header>
-    <ProjectList :projects="projects" :allowEdit="false" :showStatus="false" />
+        <ProjectList :projects="projects" :type="'ext'" />
   </div>
 </template>
 
