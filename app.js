@@ -75,19 +75,30 @@ app.get('/api/projects/:id', function (req, res) {
 
 // PUT: An edited project
 app.put('/api/projects/:id', function (req, res) {
+  const values = [
+    req.body.title,
+    req.body.lecturer,
+    req.body.status,
+    req.body.professor,
+    req.body.description,
+    req.body.extern_name,
+    req.body.extern_email,
+    convertDatepickerToMariaDB(req.body.extern_date),
+    req.body.extern_comment
+  ];
   con.then(connection => {
     connection.query(`UPDATE project SET
-      title = '${req.body.title}',
-      lecturer = '${req.body.lecturer}',
-      status = '${req.body.status}',
-      professor = '${req.body.professor}',
-      description = '${req.body.description}',
-      extern_name = '${req.body.extern_name}',
-      extern_email = '${req.body.extern_email}',
-      extern_date = '${convertDatepickerToMariaDB(req.body.extern_date)}',
-      extern_comment = '${req.body.extern_comment}' 
+      title = ?,
+      lecturer = ?,
+      status = ?,
+      professor = ?,
+      description = ?,
+      extern_name = ?,
+      extern_email = ?,
+      extern_date = ?,
+      extern_comment = ?
     WHERE id = ${req.params.id}
-    `).then(project => {
+    `, values).then(project => {
       res.json(project);
     });
   });
@@ -95,18 +106,20 @@ app.put('/api/projects/:id', function (req, res) {
 
 // CREATE: A new project
 app.post('/api/projects', function (req, res) {
+  const values = [
+    req.body.title,
+    req.body.lecturer,
+    req.body.status,
+    req.body.professor,
+    req.body.description,
+    req.body.extern_name,
+    req.body.extern_email,
+    convertDatepickerToMariaDB(req.body.extern_date),
+    req.body.extern_comment
+  ];
   con.then(connection => { connection.query(
-    `INSERT INTO project (title, lecturer, status, professor, description, extern_name, extern_email, extern_date, extern_comment) values(
-      '${req.body.title}',
-      '${req.body.lecturer}',
-      '${req.body.status}',
-      '${req.body.professor}',
-      '${req.body.description}',
-      '${req.body.extern_name}',
-      '${req.body.extern_email}',
-      '${convertDatepickerToMariaDB(req.body.extern_date)}',
-      '${req.body.extern_comment}'
-    )`).then(projects => {
+    `INSERT INTO project (title, lecturer, status, professor, description, extern_name, extern_email, extern_date, extern_comment) 
+    values  (?, ?, ?, ?, ?, ?, ?, ?, ?)`, values).then(projects => {
       res.sendStatus(200);
     });
   });
@@ -121,6 +134,8 @@ app.post('/api/projects', function (req, res) {
 function convertDatepickerToMariaDB(date) {
   return new Date(date).toISOString().slice(0, 19).replace('T', ' ');
 }
+
+
 
 /*===============*/
 /* START SERVER */
