@@ -15,18 +15,20 @@ const mariadb = require('mariadb');
 // Bodyparser is needed to parse the body of HTTP-Requests
 const bodyParser = require('body-parser');
 
+
+
 /*===============*/
 /* Configuration */
 /*===============*/
 
 // Configure and create connection to the database
-const con = mariadb.createPool({
+const pool = mariadb.createPool({
   host: '127.0.0.1',
   user: 'root',
   password: 'root',
   database: 'profs_planen_projekte',
   connectionLimit: 5
-}).getConnection();
+});
 
 
 /* Express-App configuration: tell express to use different middleware: */
@@ -42,34 +44,40 @@ app.use(function (req, res, next) {
 // Tell express to use the bodyParser for JSON data
 app.use(bodyParser.json());
 
+
+
+
 /*===============*/
 /* API-Endpoints */
 /*===============*/
 
 // GET: All projects
 app.get('/api/projects', function (req, res) {
-  con.then(connection => {
+  pool.getConnection().then(connection => {
     connection.query("SELECT * FROM project").then(projects => {
       res.json(projects);
     });
+    connection.end();
   });
 });
 
 // GET: All published projects
 app.get('/api/projects/published', function (req, res) {
-  con.then(connection => {
+  pool.getConnection().then(connection => {
     connection.query("SELECT * FROM project WHERE status = 1").then(projects => {
       res.json(projects);
     });
+    connection.end();
   });
 });
 
 // GET: A single project by id
 app.get('/api/projects/:id', function (req, res) {
-  con.then(connection => {
+  pool.getConnection().then(connection => {
     connection.query("SELECT * FROM project WHERE id = " + req.params.id).then(project => {
       res.json(project);
     });
+    connection.end();
   });
 });
 
@@ -86,7 +94,7 @@ app.put('/api/projects/:id', function (req, res) {
     convertDatepickerToMariaDB(req.body.extern_date),
     req.body.extern_comment
   ];
-  con.then(connection => {
+  pool.getConnection().then(connection => {
     connection.query(`UPDATE project SET
       title = ?,
       lecturer = ?,
@@ -101,6 +109,7 @@ app.put('/api/projects/:id', function (req, res) {
     `, values).then(project => {
       res.json(project);
     });
+    connection.end();
   });
 });
 
@@ -117,13 +126,16 @@ app.post('/api/projects', function (req, res) {
     convertDatepickerToMariaDB(req.body.extern_date),
     req.body.extern_comment
   ];
-  con.then(connection => { connection.query(
+  pool.getConnection().then(connection => { connection.query(
     `INSERT INTO project (title, lecturer, status, professor, description, extern_name, extern_email, extern_date, extern_comment) 
     values  (?, ?, ?, ?, ?, ?, ?, ?, ?)`, values).then(projects => {
       res.sendStatus(200);
     });
+    connection.end();
   });
 });
+
+
 
 /*==================*/
 /* Helper functions */
