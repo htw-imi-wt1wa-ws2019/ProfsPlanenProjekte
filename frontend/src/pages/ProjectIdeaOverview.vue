@@ -4,7 +4,7 @@
       <h1 class="md-headline">Projektideen</h1>
       <md-button v-on:click="goToAddProject">Projekt hinzufügen</md-button>
     </header>
-    <ProjectList :projects="projects" :allowEdit="true" :showStatus="true" />
+    <ProjectList :projects="projects" :type="'int'" />
   </div>
 </template>
 

@@ -5,15 +5,16 @@
         <div class="project-item__title">
           <h2 class="md-title">{{ project.title }}</h2>
           <md-badge
-            v-if="showStatus && project.status === 1"
+            v-if="project.status === 1"
             class="md-square"
             md-content="Veröffentlicht"
           />
         </div>
-        <md-subheader>{{ project.lecturer }}</md-subheader>
+        <div>
+          <md-subheader>Betreuer: {{ project.lecturer }}</md-subheader>
+        </div>
       </div>
       <md-button
-        v-if="allowEdit"
         class="md-icon-button"
         :to="'/edit/' + project.id"
       >
@@ -23,13 +24,26 @@
       </md-button>
     </md-toolbar>
 
-    <div class="md-layout contact-layout">
-      <label class="md-body-2">Kontaktperson</label>
+      <div class="md-layout">
+        <md-content class="md-layout-item projectlist__item__desc">
+          <md-subheader class="projectlist__item__header">Beschreibung</md-subheader>
+          <md-subheader>{{ project.description }}</md-subheader>
+        </md-content>
+        <md-content class="md-layout-item">
+          <md-subheader class="projectlist__item__header">Professor</md-subheader>
+          <md-subheader>{{ project.professor }}</md-subheader>
+        </md-content>
+      </div>
+      
+      <md-divider></md-divider>
+
+    <div class="md-layout contact-layout" v-if="project.extern_name">
+      <label class="md-body-2">Externe Person</label>
 
       <div class="md-layout">
         <md-content class="md-layout-item">
           <md-subheader class="projectlist__item__header">Name</md-subheader>
-          <md-subheader>{{ project.contact_name }}</md-subheader>
+          <md-subheader>{{ project.extern_name }}</md-subheader>
         </md-content>
         <md-content class="md-layout-item">
           <md-subheader class="projectlist__item__header">Datum</md-subheader>
@@ -39,42 +53,44 @@
 
       <md-content class="md-layout-item md-layout__email">
         <md-subheader class="projectlist__item__header">E-Mail</md-subheader>
-        <md-subheader>{{ project.contact_email }}</md-subheader>
+        <md-subheader>{{ project.extern_email }}</md-subheader>
       </md-content>
-    </div>
-
-    <div v-if="project.comment !== 'null' && project.comment !== ''">
-      <md-divider></md-divider>
+    <div v-if="project.extern_comment && project.extern_comment !== ''">
       <div class="md-layout">
         <md-content class="md-layout-item">
           <md-subheader class="projectlist__item__header"
             >Bemerkungen</md-subheader
           >
-          <md-subheader>{{ project.comment }}</md-subheader>
+          <md-subheader>{{ project.extern_comment }}</md-subheader>
         </md-content>
       </div>
     </div>
+    </div>
+
   </md-card>
 </template>
 
 <script>
 export default {
-  name: "ProjectIdeaListItem",
+  name: "ProjectListItemInt",
 
   // Properties that parent elements can input data into
   props: {
     project: Object,
-    allowEdit: Boolean,
-    showStatus: Boolean
+    template: 'int' | 'ext',
   },
 
+  mounted: function() {
+    console.warn(this.project);
+    
+  },
   // Computed values get recomputed, when props/data properties change
   computed: {
     iconUrl() {
       return require("@/assets/icon-edit.svg");
     },
     formattedDate() {
-      const date = new Date(this.project.contact_date);
+      const date = new Date(this.project.extern_date);
       return `${date.getDate()}.${date.getMonth()}.${date.getFullYear()}`;
     }
   }
@@ -109,7 +125,6 @@ export default {
 }
 .project-item__header {
   display: flex;
-  justify-content: space-between;
   align-items: center;
   width: 100%;
 }
@@ -124,9 +139,13 @@ export default {
 }
 .project-item__title {
   display: flex;
+  width: 75%;
   align-items: center;
 }
 .md-badge {
   margin-left: 1em;
+}
+.projectlist__item__desc {
+  min-width: 65%;
 }
 </style>

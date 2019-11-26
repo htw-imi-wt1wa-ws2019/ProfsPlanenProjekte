@@ -15,7 +15,6 @@ const mariadb = require('mariadb');
 // Bodyparser is needed to parse the body of HTTP-Requests
 const bodyParser = require('body-parser');
 
-
 /*===============*/
 /* Configuration */
 /*===============*/
@@ -42,7 +41,6 @@ app.use(function (req, res, next) {
 
 // Tell express to use the bodyParser for JSON data
 app.use(bodyParser.json());
-
 
 /*===============*/
 /* API-Endpoints */
@@ -77,17 +75,30 @@ app.get('/api/projects/:id', function (req, res) {
 
 // PUT: An edited project
 app.put('/api/projects/:id', function (req, res) {
+  const values = [
+    req.body.title,
+    req.body.lecturer,
+    req.body.status,
+    req.body.professor,
+    req.body.description,
+    req.body.extern_name,
+    req.body.extern_email,
+    convertDatepickerToMariaDB(req.body.extern_date),
+    req.body.extern_comment
+  ];
   con.then(connection => {
     connection.query(`UPDATE project SET
-      title = '${req.body.title}',
-      lecturer = '${req.body.lecturer}',
-      comment = '${req.body.comment}',
-      contact_name = '${req.body.contact_name}',
-      contact_email = '${req.body.contact_email}',
-      contact_date = '${convertDatepickerToMariaDB(req.body.contact_date)}',
-      status = '${req.body.status}' 
+      title = ?,
+      lecturer = ?,
+      status = ?,
+      professor = ?,
+      description = ?,
+      extern_name = ?,
+      extern_email = ?,
+      extern_date = ?,
+      extern_comment = ?
     WHERE id = ${req.params.id}
-    `).then(project => {
+    `, values).then(project => {
       res.json(project);
     });
   });
@@ -95,22 +106,24 @@ app.put('/api/projects/:id', function (req, res) {
 
 // CREATE: A new project
 app.post('/api/projects', function (req, res) {
-  con.then(connection => {
-    connection.query(`INSERT INTO project (title, lecturer, comment, contact_name, contact_email, contact_date, status) 
-                      values(
-                        '${req.body.title}',
-                        '${req.body.lecturer}',
-                        '${req.body.comment}',
-                        '${req.body.contact_name}',
-                        '${req.body.contact_email}',
-                        '${convertDatepickerToMariaDB(req.body.contact_date)}',
-                        '${req.body.status}'
-    )`).then(projects => {
+  const values = [
+    req.body.title,
+    req.body.lecturer,
+    req.body.status,
+    req.body.professor,
+    req.body.description,
+    req.body.extern_name,
+    req.body.extern_email,
+    convertDatepickerToMariaDB(req.body.extern_date),
+    req.body.extern_comment
+  ];
+  con.then(connection => { connection.query(
+    `INSERT INTO project (title, lecturer, status, professor, description, extern_name, extern_email, extern_date, extern_comment) 
+    values  (?, ?, ?, ?, ?, ?, ?, ?, ?)`, values).then(projects => {
       res.sendStatus(200);
     });
   });
 });
-
 
 /*==================*/
 /* Helper functions */
@@ -122,14 +135,6 @@ function convertDatepickerToMariaDB(date) {
   return new Date(date).toISOString().slice(0, 19).replace('T', ' ');
 }
 
-// // Helper function to help easily delete all projects in development
-// app.get('/api/delete', function (req, res) {
-//   con.then(connection => {
-//     connection.query("DELETE FROM project").then(projects => {
-//       res.sendStatus(200);
-//     });
-//   });
-// });
 
 
 /*===============*/

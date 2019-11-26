@@ -2,10 +2,14 @@
   <div class="project-list">
     <md-list class="md-double-line">
       <md-list-item v-for="(project, index) in projects" :key="index">
-        <ProjectListItem
+        <ProjectListItemInt
+          v-if="type === 'int'"
           :project="project"
-          :allowEdit="allowEdit"
-          :showStatus="showStatus"
+        />
+        <ProjectListItemExt
+          v-if="type === 'ext'"
+          :project="project"
+          :index="index"
         />
       </md-list-item>
     </md-list>
@@ -13,20 +17,21 @@
 </template>
 
 <script>
-import ProjectListItem from "./ProjectListItem.vue";
+import ProjectListItemInt from "./ProjectListItemInt.vue";
+import ProjectListItemExt from "./ProjectListItemExt.vue";
 
 export default {
   name: "ProjectList",
   // Register components we want to use
   components: {
-    ProjectListItem
+    ProjectListItemInt,
+    ProjectListItemExt
   },
 
   // Properties that parent elements can input data into
   props: {
     projects: Array,
-    allowEdit: Boolean,
-    showStatus: Boolean
+    type: 'int' | 'ext',
   }
 };
 </script>
