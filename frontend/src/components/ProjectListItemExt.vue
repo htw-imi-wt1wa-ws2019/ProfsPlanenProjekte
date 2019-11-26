@@ -11,7 +11,7 @@
     </md-toolbar>
 
 
-    <div v-if="project.comment && project.comment !== ''">
+    <div v-if="project.description && project.description !== ''">
       <md-divider></md-divider>
       <div class="md-layout">
         <md-content class="md-layout-item">
