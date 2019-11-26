@@ -3,7 +3,6 @@
     <md-toolbar>
       <div class="project-item__header">
         <div class="project-item__title">
-          <h2 class="md-title">#{{ project.id }} | </h2>
           <h2 class="md-title">{{ project.title }}</h2>
           <md-badge
             v-if="project.status === 1"

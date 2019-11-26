@@ -9,6 +9,7 @@
         <ProjectListItemExt
           v-if="type === 'ext'"
           :project="project"
+          :index="index"
         />
       </md-list-item>
     </md-list>

@@ -3,7 +3,7 @@
     <md-toolbar>
       <div class="project-item__header">
         <div class="project-item__title">
-          <h2 class="md-title">#{{ project.id }} | </h2>
+          <h2 class="md-title">#{{ index + 1 }} | </h2>
           <h2 class="md-title">{{ project.title }}</h2>
         </div>
         <md-subheader>Betreuer: {{ project.lecturer }}</md-subheader>
@@ -31,7 +31,8 @@ export default {
 
   // Properties that parent elements can input data into
   props: {
-    project: Object
+    project: Object,
+    index: Number
   }
 };
 </script>
