@@ -6,7 +6,6 @@
 
 // Express is a NodeJS Framework for creating a webserver
 var express = require('express');
-var path = require('path');
 var app = express();
 
 // NPM-Package that enables the server to talk to the MariaDB database
