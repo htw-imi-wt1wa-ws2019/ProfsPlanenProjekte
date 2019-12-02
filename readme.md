@@ -1,3 +1,6 @@
+# Documentation
+[See Wiki entry](https://github.com/htw-imi-wt1wa-ws2019/ProfsPlanenProjekte/wiki/Documentation)
+
 # Setup
 
 1. Install [Node.JS](https://nodejs.org)
