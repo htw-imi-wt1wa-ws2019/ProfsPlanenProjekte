@@ -1,5 +1,5 @@
 # Documentation
-[See Wiki entry](https://github.com/htw-imi-wt1wa-ws2019/ProfsPlanenProjekte/wiki/Documentation)
+[See wiki entry](https://github.com/htw-imi-wt1wa-ws2019/ProfsPlanenProjekte/wiki/Documentation)
 
 # Setup
 
